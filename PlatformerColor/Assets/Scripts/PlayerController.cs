@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 8.0f;
 	public float acceleration = 30.0f;
 	public float jumpHeight = 12.0f;
+	public float runnerForce = 5.0f;
 
 	private float currentSpeed;
 	private float targetSpeed;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		amountToMove.x = currentSpeed;
+		amountToMove.x = currentSpeed + runnerForce;
 		amountToMove.y -= gravity * Time.deltaTime;
 		playerPhysics.Move (amountToMove * Time.deltaTime);
 	}

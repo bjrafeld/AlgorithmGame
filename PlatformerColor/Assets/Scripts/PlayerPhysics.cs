@@ -17,7 +17,7 @@ public class PlayerPhysics : MonoBehaviour {
 	private Vector3 size;
 	private Vector3 center;
 
-	private float skin = .005f;
+	public float skin = .005f;
 
 	Ray ray;
 	RaycastHit hit;
