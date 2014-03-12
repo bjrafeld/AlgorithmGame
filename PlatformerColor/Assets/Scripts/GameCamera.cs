@@ -4,6 +4,7 @@ using System.Collections;
 public class GameCamera : MonoBehaviour {
 
 	public float trackSpeed = 10;
+	public float cameraAddHeight = 2.0f;
 
 	private Transform target;
 
@@ -14,7 +15,7 @@ public class GameCamera : MonoBehaviour {
 	void LateUpdate() {
 		if(target) {
 			float x = IncrementTowards(transform.position.x, target.position.x, trackSpeed);
-			float y = IncrementTowards(transform.position.y, target.position.y, trackSpeed);
+			float y = IncrementTowards(transform.position.y, target.position.y + cameraAddHeight, trackSpeed);
 			transform.position = new Vector3(x, y, transform.position.z);
 		}
 	}
