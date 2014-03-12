@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpHeight = 12.0f;
 	public float runnerForce = 5.0f;
 
+	public static float distanceTravelled;
+
 	private float currentSpeed;
 	private float targetSpeed;
 	private Vector2 amountToMove;
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 		amountToMove.x = currentSpeed + runnerForce;
 		amountToMove.y -= gravity * Time.deltaTime;
 		playerPhysics.Move (amountToMove * Time.deltaTime);
+		distanceTravelled = transform.position.x;
 	}
 
 	float IncrementTowards(float n, float target, float a) {
