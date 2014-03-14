@@ -6,19 +6,28 @@ public class GameCamera : MonoBehaviour {
 	public float trackSpeed = 10;
 	public float cameraAddHeight = 2.0f;
 
+	public float cameraBuffer = 1f;
+
 	private Transform target;
+
+	private PlayerController player;
+
+	void Start() {
+	}
 
 	public void SetTarget(Transform t) {
 		target = t;
 	}
 
-	void LateUpdate() {
+	void Update() {
 		if(target) {
-			float x = IncrementTowards(transform.position.x, target.position.x, trackSpeed);
-			float y = IncrementTowards(transform.position.y, target.position.y + cameraAddHeight, trackSpeed);
-			transform.position = new Vector3(x, y, transform.position.z);
+			//Restrict too much forward movement
+			Vector3 clipRightPoint = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth, 0.0f, camera.nearClipPlane));
+			float maxRight = clipRightPoint.x;
+			transform.Translate( new Vector3(PlayerController.runnerForce,0) * Time.deltaTime);
 		}
 	}
+
 
 	float IncrementTowards(float n, float target, float a) {
 		if(n == target) {

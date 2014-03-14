@@ -19,6 +19,8 @@ public class PlayerPhysics : MonoBehaviour {
 
 	public float skin = .005f;
 
+	public float boundary = 1f;
+
 	Ray ray;
 	RaycastHit hit;
 
@@ -84,5 +86,12 @@ public class PlayerPhysics : MonoBehaviour {
 		Vector2 finalTransform = new Vector2(deltaX, deltaY);
 
 		transform.Translate(finalTransform);
+
+		//Check if too far right
+		float right = (Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0))).x;
+		right -= boundary;
+		if(transform.position.x >= right) {
+			transform.position = new Vector3(right, transform.position.y, transform.position.z);
+		}
 	}
 }
