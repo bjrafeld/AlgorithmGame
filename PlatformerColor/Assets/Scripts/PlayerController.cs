@@ -6,8 +6,14 @@ public class PlayerController : MonoBehaviour {
 
 	//Player Handling
 	public float gravity = 20;
-	public static float speed = 8.0f;
-	public static float acceleration = 30.0f;
+	public float speed = 8.0f;
+	public float acceleration = 30.0f;
+	public float slowFactor = 2f;
+
+	private float normalAcceleration;
+	private float normalSpeed;
+	private float slowSpeed;
+	private float slowAcceleration;
 	public float jumpHeight = 12.0f;
 	public static float runnerForce = 5.0f;
 
@@ -22,6 +28,10 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponent<PlayerPhysics>();
+		normalAcceleration = acceleration;
+		normalSpeed = speed;
+		slowSpeed = (speed/slowFactor);
+		slowAcceleration = (acceleration/slowFactor);
 	}
 	
 	// Update is called once per frame
@@ -31,8 +41,7 @@ public class PlayerController : MonoBehaviour {
 			targetSpeed = 0;
 		}
 
-		targetSpeed = Input.GetAxisRaw("Horizontal") * PlayerController.speed;
-		Debug.Log ("Current speed is: " + PlayerController.speed);
+		targetSpeed = Input.GetAxisRaw("Horizontal") * this.speed;
 		currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 
 		if(playerPhysics.grounded) {
@@ -60,5 +69,15 @@ public class PlayerController : MonoBehaviour {
 			n += a * Time.deltaTime * dir;
 			return (dir == Mathf.Sign (target - n))? n: target;
 		}
+	}
+
+	public void slowMovement() {
+		this.acceleration = slowAcceleration;
+		this.speed = slowSpeed;
+	}
+
+	public void normalMovement() {
+		this.acceleration = normalAcceleration;
+		this.speed = normalSpeed;
 	}
 }

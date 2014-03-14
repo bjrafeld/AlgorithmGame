@@ -16,6 +16,7 @@ public class PlayerPhysics : MonoBehaviour {
 	private BoxCollider collider;
 	private Vector3 size;
 	private Vector3 center;
+	private PlayerController player;
 
 	public float skin = .005f;
 
@@ -26,6 +27,7 @@ public class PlayerPhysics : MonoBehaviour {
 
 	void Start() {
 		collider = GetComponent<BoxCollider>();
+		player = GetComponent<PlayerController>();
 		size = collider.size;
 		center = collider.center;
 
@@ -54,6 +56,12 @@ public class PlayerPhysics : MonoBehaviour {
 					deltaY = distance * dir - skin * dir;
 				} else {
 					deltaY = 0;
+				}
+
+				if (hit.collider.tag == "Normal" && dir == -1) {
+					player.normalMovement();
+				} else if (hit.collider.tag == "Slow" && dir == -1) {
+					player.slowMovement();
 				}
 				grounded = true;
 				break;
