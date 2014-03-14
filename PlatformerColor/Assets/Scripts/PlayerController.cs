@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
 
 	//Player Handling
 	public float gravity = 20;
-	public float speed = 8.0f;
-	public float acceleration = 30.0f;
+	public static float speed = 8.0f;
+	public static float acceleration = 30.0f;
 	public float jumpHeight = 12.0f;
 	public static float runnerForce = 5.0f;
 
@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour {
 			targetSpeed = 0;
 		}
 
-		targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
+		targetSpeed = Input.GetAxisRaw("Horizontal") * PlayerController.speed;
+		Debug.Log ("Current speed is: " + PlayerController.speed);
 		currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 
 		if(playerPhysics.grounded) {

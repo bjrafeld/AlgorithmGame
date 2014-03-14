@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour {
 		if (transform.position.x <= (left + deathEdge)) {
 			Debug.Log("Fell and lost a life");
 			loseLife();
-			Vector3 newPosition = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
+			Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, .8f, 0));
+			Vector3 newPosition = new Vector3(position.x, position.y, 0);
 			transform.position = newPosition;
 		}
 	}
