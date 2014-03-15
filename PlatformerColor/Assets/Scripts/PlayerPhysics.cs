@@ -91,6 +91,18 @@ public class PlayerPhysics : MonoBehaviour {
 			}
 			
 		}
+
+		if(!grounded && !movementStopped) {
+			Vector3 playerDirection = new Vector3(deltaX, deltaY);
+			Vector3 origin = new Vector3(playerPosition.x + center.x + size.x/2 * Mathf.Sign(deltaX), playerPosition.y + center.y + size.y/2 * Mathf.Sign(deltaY));
+			ray = new Ray(origin, playerDirection.normalized);
+
+			if(Physics.Raycast(ray, Mathf.Sqrt((deltaX*deltaX) + (deltaY*deltaY)), collisionMask)) {
+				grounded = true;
+				deltaY = 0;
+			}
+		}
+
 		Vector2 finalTransform = new Vector2(deltaX, deltaY);
 
 		transform.Translate(finalTransform);

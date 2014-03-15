@@ -26,6 +26,7 @@ public class PlatformManager : MonoBehaviour {
 
 	void Update () {
 		if(objectQueue.Peek().localPosition.x + recycleOffset < PlayerController.distanceTravelled){
+			//hazard lottery here
 			Recycle();
 		}
 	}
