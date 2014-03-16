@@ -4,11 +4,14 @@ using System.Collections.Generic;
 public class PlatformManager : MonoBehaviour {
 
 	public Transform prefab;
+	public Transform hazardPrefab;
 	public int numberOfObjects;
 	public float recycleOffset;
 	public Vector3 startPosition;
 	public Vector3 minSize, maxSize, minGap, maxGap;
 	public float minY, maxY;
+
+	public float hazardProbability = 0f;
 
 	private Vector3 nextPosition;
 	private Queue<Transform> objectQueue;
@@ -26,7 +29,6 @@ public class PlatformManager : MonoBehaviour {
 
 	void Update () {
 		if(objectQueue.Peek().localPosition.x + recycleOffset < PlayerController.distanceTravelled){
-			//hazard lottery here
 			Recycle();
 		}
 	}
@@ -57,5 +59,25 @@ public class PlatformManager : MonoBehaviour {
 		else if(nextPosition.y > maxY){
 			nextPosition.y = maxY - maxGap.y;
 		}
+
+		float lottery = Random.Range (0.0f, 1.0f);
+		if (lottery <= hazardProbability) {
+			//Calculate Random Size
+			float maxHazardSize = hazardProbability * o.localScale.x;
+			float hazardSize = Random.Range(1.0f, Mathf.Max(1.0f, maxHazardSize));
+
+			//Calculate random position
+			float hazardX = hazardSize/2;
+			float oPosition = o.position.x;
+			float oSize = o.localScale.x/2;
+			float x = Random.Range (((oPosition - oSize) + hazardX), (((oPosition + oSize) - hazardX)));
+			float y = o.position.y + o.localScale.y/2 + hazardPrefab.transform.localScale.y/2;
+			Vector3 newPosition = new Vector3(x, y, 0.0f);
+
+			//Instantiate and set size
+			Transform hazard = Instantiate(hazardPrefab, newPosition, Quaternion.identity) as Transform;
+			hazard.localScale = new Vector3(hazardSize, hazard.localScale.y, hazard.localScale.z);
+		}
+
 	}
 }

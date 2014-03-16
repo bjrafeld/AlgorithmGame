@@ -17,6 +17,7 @@ public class PlayerPhysics : MonoBehaviour {
 	private Vector3 size;
 	private Vector3 center;
 	private PlayerController player;
+	private PlayerHealth playerHealth;
 
 	public float skin = .005f;
 
@@ -28,6 +29,7 @@ public class PlayerPhysics : MonoBehaviour {
 	void Start() {
 		collider = GetComponent<BoxCollider>();
 		player = GetComponent<PlayerController>();
+		playerHealth = GetComponent<PlayerHealth>();
 		size = collider.size;
 		center = collider.center;
 
@@ -62,6 +64,9 @@ public class PlayerPhysics : MonoBehaviour {
 					player.normalMovement();
 				} else if (hit.collider.tag == "Slow" && dir == -1) {
 					player.slowMovement();
+				} else if (hit.collider.tag == "Death") {
+					Debug.Log ("I see the spikes!!!!! Bleghhhhhh...");
+					playerHealth.loseLife();
 				}
 				grounded = true;
 				break;
