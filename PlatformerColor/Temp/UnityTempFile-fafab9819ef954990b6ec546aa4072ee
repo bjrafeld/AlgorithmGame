@@ -36,8 +36,12 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
+'Assets/Scripts/DestroyOnScreenLeft.cs'
 'Assets/Scripts/GameCamera.cs'
 'Assets/Scripts/GameManager.cs'
+'Assets/Scripts/GameTimer.cs'
+'Assets/Scripts/MainMenuLayout.cs'
+'Assets/Scripts/PauseMenu.cs'
 'Assets/Scripts/PlatformManager.cs'
 'Assets/Scripts/PlayerController.cs'
 'Assets/Scripts/PlayerHealth.cs'

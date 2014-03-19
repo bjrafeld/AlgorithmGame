@@ -36,11 +36,15 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
-'Assets/Prefabs/PlayerHealth.cs'
+'Assets/Scripts/DestroyOnScreenLeft.cs'
 'Assets/Scripts/GameCamera.cs'
 'Assets/Scripts/GameManager.cs'
+'Assets/Scripts/GameTimer.cs'
+'Assets/Scripts/MainMenuLayout.cs'
+'Assets/Scripts/PauseMenu.cs'
 'Assets/Scripts/PlatformManager.cs'
 'Assets/Scripts/PlayerController.cs'
+'Assets/Scripts/PlayerHealth.cs'
 'Assets/Scripts/PlayerPhysics.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'

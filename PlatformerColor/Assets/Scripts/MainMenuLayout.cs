@@ -16,14 +16,9 @@ public class MainMenuLayout : MonoBehaviour {
 	void OnGUI() {
 		float centerPointX = (Camera.main.pixelWidth/2);
 		float centerPointY = (Camera.main.pixelHeight/2 - buttonHeight/2);
-		if(GUI.Button (new Rect(centerPointX - (((3/2)*centerSymmetry) + ((3/2)*buttonWidth)), centerPointY + heightBuffer, buttonWidth, buttonHeight), "Gary")) {
+		if(GUI.Button (new Rect((centerPointX - (1/2)*buttonWidth), centerPointY + heightBuffer, buttonWidth, buttonHeight), "Start Game")) {
 			Debug.Log ("Gary clicked");
 			Application.LoadLevel("Gary");
-		}
-
-		if(GUI.Button (new Rect(centerPointX + centerSymmetry/2 + (buttonWidth/2), centerPointY + heightBuffer, buttonWidth, buttonHeight), "Buddy")) {
-			Debug.Log ("Buddy clicked");
-			Application.LoadLevel("Buddy");
 		}
 	}
 }
