@@ -3,13 +3,15 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour {
 
-	public static int lives = 3;
+	public int lives = 3;
 
 	public float deathEdge = 1f;
 
+	private GameTimer timer;
+
 	// Use this for initialization
 	void Start () {
-
+		timer = Camera.main.GetComponent<GameTimer>();
 	}
 	
 	// Update is called once per frame
@@ -22,8 +24,8 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void loseLife() {
-		PlayerHealth.lives -= 1;
-		if (PlayerHealth.lives <= 0) {
+		this.lives -= 1;
+		if (this.lives <= 0) {
 			gameOverScreen();
 		}
 		Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, .8f, 0));
@@ -32,7 +34,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	void gameOverScreen() {
-		//Load GameOver!!!
+		timer.ShowScore();
 	}
 	
 }

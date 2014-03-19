@@ -39,14 +39,25 @@ public class PlatformManager : MonoBehaviour {
 			Random.Range(minSize.y, maxSize.y),
 			Random.Range(minSize.z, maxSize.z));
 
+		Vector3 frontScale = scale;
+		frontScale.y += 1;
+
 		Vector3 position = nextPosition;
 		position.x += scale.x * 0.5f;
 		position.y += scale.y * 0.5f;
+
+		Vector3 frontPosition = nextPosition;
+		frontPosition.x += scale.x * 0.5f;
+		frontPosition.y += scale.y * 0.5f;
+		frontPosition.z -= 3.0f;
 
 		Transform o = objectQueue.Dequeue();
 		o.localScale = scale;
 		o.localPosition = position;
 		objectQueue.Enqueue(o);
+
+		//Transform front =  Instantiate(prefab, frontPosition, prefab.transform.rotation) as Transform;
+		//front.localScale = frontScale;
 
 		nextPosition += new Vector3(
 			Random.Range(minGap.x, maxGap.x) + scale.x,
@@ -75,7 +86,7 @@ public class PlatformManager : MonoBehaviour {
 			Vector3 newPosition = new Vector3(x, y, 0.0f);
 
 			//Instantiate and set size
-			Transform hazard = Instantiate(hazardPrefab, newPosition, Quaternion.identity) as Transform;
+			Transform hazard = Instantiate(hazardPrefab, newPosition, hazardPrefab.transform.rotation) as Transform;
 			hazard.localScale = new Vector3(hazardSize, hazard.localScale.y, hazard.localScale.z);
 		}
 

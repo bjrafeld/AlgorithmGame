@@ -20,8 +20,10 @@ public class GameTimer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		totalTime = timer;
 		menu = GetComponent<PauseMenu>();
+		BeginHazard();
 	}
 	
 	// Update is called once per frame
@@ -42,12 +44,21 @@ public class GameTimer : MonoBehaviour {
 		if (timer >= ((3 * (totalTime/4))) && timer <= ((3 * (totalTime/4)) + .25f)) {
 			QuarterLevel();
 		}
+
+		if (timer >= (totalTime/4) && timer <= (totalTime/4 + .25f)) {
+
+		}
+	}
+
+	void BeginHazard() {
+		Debug.Log ("hit start time");
+		manager.hazardProbability = .1f;
 	}
 
 	void QuarterLevel() {
 		Debug.Log ("hit quarter time");
 		manager.hazardProbability = .35f;
-
+		//manager.hazardProbability = 1f;
 	}
 
 	void HalfLevel() {
@@ -73,7 +84,7 @@ public class GameTimer : MonoBehaviour {
 		}
 	}
 
-	void ShowScore() {
+	public void ShowScore() {
 		showScore = true;
 	}
 
